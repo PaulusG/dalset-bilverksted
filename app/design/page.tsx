@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Banner, Section, ServiceCard, CategoryCard } from '@/components/ui';
+import { COMPANY, SERVICES, CATEGORIES, NAV_ITEMS } from '@/lib/constants';
 
 // NOTE: This page can be removed later by deleting the app/design/ folder
 // It showcases all reusable UI elements for design reference
@@ -104,6 +106,26 @@ export default function DesignPage() {
           </div>
         </section>
 
+        {/* Service Cards (Using Component) */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-black mb-6">Service Kort (Komponent)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {SERVICES.slice(0, 2).map((service) => (
+              <ServiceCard key={service.id} service={service} showLink linkText="Les mer →" />
+            ))}
+          </div>
+        </section>
+
+        {/* Category Cards (Using Component) */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-black mb-6">Kategori Kort (Komponent)</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CATEGORIES.slice(0, 4).map((category) => (
+              <CategoryCard key={category} category={category} />
+            ))}
+          </div>
+        </section>
+
         {/* Cards */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-black mb-6">Kort</h2>
@@ -185,25 +207,18 @@ export default function DesignPage() {
           </div>
         </section>
 
-        {/* Banners */}
+        {/* Banners (Using Component) */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-black mb-6">Bannere</h2>
-          <div className="space-y-6">
-            <div className="bg-primary-brown py-8 px-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-white mb-2">Fullbredde banner</h3>
-              <p className="text-white/90">Dette er et eksempel på en farget banner.</p>
-            </div>
-            <div className="bg-primary-green py-8 px-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-white mb-2">Grønn banner</h3>
-              <p className="text-white/90">Alternativ farget banner.</p>
-            </div>
-            <div className="bg-gray-100 border border-gray-300 py-8 px-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-black mb-2">Nøytral banner</h3>
-              <p className="text-gray-700">Banner med nøytral bakgrunn.</p>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-black mb-6">Bannere (Komponent)</h2>
         </section>
+      </div>
 
+      {/* Full-width banners outside container */}
+      <Banner title="Brun banner" subtitle="Dette er en brun banner med undertekst." variant="brown" />
+      <Banner title="Grønn banner" subtitle="Dette er en grønn banner med undertekst." variant="green" />
+      <Banner title="Hvit banner" subtitle="Dette er en hvit banner med undertekst." variant="white" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         {/* Links */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-black mb-6">Lenker</h2>
@@ -250,15 +265,15 @@ export default function DesignPage() {
           <h2 className="text-3xl font-bold text-black mb-6">Navigasjonskomponenter</h2>
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <nav className="flex space-x-6">
-              <Link href="/" className="text-black hover:text-primary-brown transition-all duration-300">
-                Forsiden
-              </Link>
-              <Link href="/kontakt" className="text-primary-brown border-b-2 border-primary-brown transition-all duration-300">
-                Kontakt
-              </Link>
-              <Link href="/tjenester" className="text-black hover:text-primary-brown transition-all duration-300">
-                Tjenester
-              </Link>
+              {NAV_ITEMS.slice(0, 3).map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={index === 1 ? 'text-primary-brown border-b-2 border-primary-brown transition-all duration-300' : 'text-black hover:text-primary-brown transition-all duration-300'}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
             <p className="text-sm text-gray-600 mt-4">Eksempel på navigasjon med aktiv tilstand</p>
           </div>
@@ -271,18 +286,18 @@ export default function DesignPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <h3 className="font-bold mb-2">Kontakt</h3>
-                <p className="text-sm text-gray-400">E-post: post@dalsetbilverksted.no</p>
-                <p className="text-sm text-gray-400">Telefon: 98658834</p>
+                <p className="text-sm text-gray-400">E-post: {COMPANY.contact.email}</p>
+                <p className="text-sm text-gray-400">Telefon: {COMPANY.contact.phone}</p>
               </div>
               <div>
                 <h3 className="font-bold mb-2">Adresse</h3>
-                <p className="text-sm text-gray-400">Dalsetvegen 22</p>
-                <p className="text-sm text-gray-400">6350 Eidsbygda</p>
+                <p className="text-sm text-gray-400">{COMPANY.address.street}</p>
+                <p className="text-sm text-gray-400">{COMPANY.address.postalCode} {COMPANY.address.city}</p>
               </div>
               <div>
                 <h3 className="font-bold mb-2">Åpningstider</h3>
-                <p className="text-sm text-gray-400">Man-Fre: 08:00 - 16:00</p>
-                <p className="text-sm text-gray-400">Lør-Søn: Stengt</p>
+                <p className="text-sm text-gray-400">Man-Fre: {COMPANY.openingHours.weekdays}</p>
+                <p className="text-sm text-gray-400">Lør-Søn: {COMPANY.openingHours.weekend}</p>
               </div>
             </div>
           </div>
@@ -291,4 +306,3 @@ export default function DesignPage() {
     </div>
   );
 }
-

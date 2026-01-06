@@ -3,14 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
-const navItems = [
-  { href: '/', label: 'Forsiden' },
-  { href: '/kontakt', label: 'Kontakt' },
-  { href: '/tjenester', label: 'Tjenester' },
-  { href: '/salgsside', label: 'Salgsside' },
-  { href: '/historie', label: 'Historie' },
-];
+import { NAV_ITEMS, COMPANY } from '@/lib/constants';
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -22,12 +15,12 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold text-black">
-            DALSET BILVERKSTED
+            {COMPANY.name}
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => {
+            {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -72,7 +65,7 @@ export default function Navigation() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4">
-            {navItems.map((item) => {
+            {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -95,4 +88,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
