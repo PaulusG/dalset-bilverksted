@@ -86,7 +86,7 @@ export default function TjenesterPage() {
                   Servicepunkt
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  For 'Orkel' og 'Lilleseth kramp'
+                  For Orkel og Lilleseth kramp
                 </p>
                 <p className="text-gray-600">
                   Vi er autorisert servicepunkt for Orkel og Lilleseth kramp. 
@@ -135,7 +135,7 @@ export default function TjenesterPage() {
             </div>
             <div>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Servicepunkt for 'Orkel' og 'Lilleseth kramp'
+                Servicepunkt for Orkel og Lilleseth kramp
               </h3>
               <p className="text-lg text-white/90 mb-6">
                 Vi er autorisert servicepunkt for Orkel og Lilleseth kramp. Våre fagfolk kjenner disse merkene godt og kan utføre alle typer service og reparasjoner.
