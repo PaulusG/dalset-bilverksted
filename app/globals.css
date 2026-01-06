@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Main Colors */
+  --background: #ffffff;
+  --foreground: #000000;
+  
+  /* Earth Tone Browns */
+  --brown-light: #A0826D;
+  --brown: #8B6F47;
+  --brown-dark: #6B5B3D;
+  
+  /* Earth Tone Greens */
+  --green-light: #7A8B5A;
+  --green: #6B8E23;
+  --green-dark: #556B2F;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
